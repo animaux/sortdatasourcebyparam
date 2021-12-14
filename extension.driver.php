@@ -24,8 +24,12 @@
 
 		public function addJavaScriptAndCSS() {
 			$callback = Symphony::Engine()->getPageCallback();
+			
+			$callback['context'][0] = $callback['context'][0] ?? null;
+			$callback['context'][1] = $callback['context'][1] ?? null;
+			
 			if ($callback['driver'] != 'blueprintsdatasources' || !is_array($callback['context'])) return;
-
+      
 			// Find data source handle.
 			$handle = NULL;
 			if ($callback['context'][0] == 'edit' && !empty($callback['context'][1])) {
